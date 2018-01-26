@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-task-list',
@@ -45,6 +47,27 @@ export class TaskListComponent implements OnInit {
     if (index !== -1) {
       this.tasks.splice(index, 1);
     }
+  }
+
+  public deleteAll() {
+    this.loading = true;
+    let observableBatch = [];
+
+    this.tasks.forEach(
+      element => {
+        observableBatch.push(
+          this._taskService.delete(element).subscribe(
+            _ => this.removeTask(element)
+          )            
+      );
+      }
+    );
+
+    forkJoin(observableBatch).subscribe(
+      null,
+      null,
+      () => this.loading = false
+    );
   }
 
 }

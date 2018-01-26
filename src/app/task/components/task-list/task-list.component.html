@@ -2,6 +2,9 @@
   My Tasks
   <img *ngIf="loading" src="assets/loader.gif">
 </h3>
+<pre>
+{{ tasks | json }}
+</pre>
 <ul>
   <li *ngFor="let task of tasks">
       <app-task-list-item
@@ -14,4 +17,7 @@
 </ul>
 <button type="button" class="btn btn-default" (click)="addNewTask()" [disabled]="loading">
   Add New Task
+</button>
+<button *ngIf="!!tasks" type="button" class="btn btn-danger" (click)="deleteAll()" [disabled]="loading">
+  Delete all
 </button>

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://ng-training-backend.stylersdev.com/api'
+  apiEndpoint: 'http://ng-training-backend.stylersdev.com/api',
 };
