@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
+import { TaskModule } from './task/task.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,9 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    TaskModule,
     RouterModule,
     AppRoutingModule,
     SharedModule

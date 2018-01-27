@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Component, OnInit } from '@angular/core';
 
-import { TaskService } from './../../services/task.service';
+import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
 
 @Component({
@@ -10,7 +10,6 @@ import { Task } from '../../models/task';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-
   public tasks: Task[];
   public loading: boolean;
 
@@ -48,5 +47,4 @@ export class TaskListComponent implements OnInit {
       this.tasks.splice(index, 1);
     }
   }
-
 }

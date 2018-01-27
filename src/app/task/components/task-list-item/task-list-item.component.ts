@@ -1,5 +1,5 @@
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { TaskService } from './../../services/task.service';
 import { Task } from './../../models/task';
@@ -21,9 +21,7 @@ export class TaskListItemComponent implements OnInit {
   @Output() public error: EventEmitter<any> = new EventEmitter();
   @Output() public delete = new EventEmitter<Task>();
 
-  constructor(private _taskService: TaskService) { 
-    
-  }
+  constructor(private _taskService: TaskService) { }
 
   ngOnInit() {
     this.now = this._getUtcTime();
@@ -36,7 +34,7 @@ export class TaskListItemComponent implements OnInit {
     window.clearInterval(this._timekeeper);
   }
 
-  private _getUtcTime() {
+   private _getUtcTime() {
     return Date.now() + (new Date()).getTimezoneOffset() * 60 * 1000;
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { User } from './../../models/user';
@@ -11,7 +11,6 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
   public loading: boolean = true;
   public user: User = new User();
   public form: FormGroup = new FormGroup({
@@ -29,6 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
+    if (this.loading) {
+      return;
+    }
     this.loading = true;
     this._authService.login(this.user).subscribe(
       response => {

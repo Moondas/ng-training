@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TaskListItemComponent } from './task-list-item.component';
+import { AgePipe } from '../../pipes/age.pipe';
+import { TaskService } from '../../services/task.service';
+import { Task } from '../../models/task';
 
 describe('TaskListItemComponent', () => {
   let component: TaskListItemComponent;
@@ -8,7 +14,9 @@ describe('TaskListItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskListItemComponent ]
+      imports: [ RouterTestingModule, FormsModule, ReactiveFormsModule, HttpClientModule ],
+      declarations: [ TaskListItemComponent, AgePipe ],
+      providers: [ TaskService ]
     })
     .compileComponents();
   }));
@@ -16,6 +24,7 @@ describe('TaskListItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TaskListItemComponent);
     component = fixture.componentInstance;
+    component.task = new Task();
     fixture.detectChanges();
   });
 

@@ -1,6 +1,7 @@
-import { User } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { User } from './../../models/user';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  public loading = true;
 
   public user: User = new User();
   public form: FormGroup = new FormGroup({
@@ -24,7 +26,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private _userService: UserService) { }
 
   ngOnInit() {
-
+    this.loading = false;
   }
 
   public register() {

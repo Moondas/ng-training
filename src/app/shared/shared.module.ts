@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
+import { ApiService } from './services/api.service';
 import { AuthService } from './services/auth.service';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -17,10 +18,14 @@ import { NavigationComponent } from './components/navigation/navigation.componen
   exports: [
     NavigationComponent
   ],
-  declarations: [NotFoundComponent, NavigationComponent],
   providers: [
+    ApiService,
     AuthService,
-    AuthGuard 
+    AuthGuard
+  ],
+  declarations: [
+    NotFoundComponent,
+    NavigationComponent
   ]
 })
 export class SharedModule { }

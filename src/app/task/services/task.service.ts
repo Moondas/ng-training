@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
+import { ApiService } from './../../shared/services/api.service';
+import { Task } from './../models/task';
 import { environment } from './../../../environments/environment';
 import { AuthService } from '../../shared/services/auth.service';
-import { ApiService } from './../../shared/services/api.service';
-import { Task } from '../models/task';
 
 @Injectable()
 export class TaskService extends ApiService {

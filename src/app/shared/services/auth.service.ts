@@ -58,17 +58,16 @@ export class AuthService {
     this._router.navigate(['/home']);
   }
 
-  private _saveToStorage() {
-    if (this.user) {
-      localStorage.setItem('user', JSON.stringify(this.user));
-    } else {
-      localStorage.removeItem('user');
-    }
-
+  private _saveToStorage(): void {
     if (this.token) {
       localStorage.setItem('token', this.token);
     } else {
       localStorage.removeItem('token');
+    }
+    if (this.user) {
+      localStorage.setItem('user', JSON.stringify(this.user));
+    } else {
+      localStorage.removeItem('user');
     }
   }
 

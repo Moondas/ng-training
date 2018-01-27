@@ -11,10 +11,14 @@ import { AgePipe } from './pipes/age.pipe';
 @NgModule({
   imports: [
     CommonModule,
-    TaskRoutingModule,
-    FormsModule
+    FormsModule,
+    TaskRoutingModule
   ],
-  declarations: [TaskListComponent, TaskListItemComponent, AgePipe],
+  declarations: [
+    TaskListComponent,
+    TaskListItemComponent,
+    AgePipe
+  ],
   providers: [
     TaskService
   ]
