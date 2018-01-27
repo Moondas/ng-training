@@ -1,3 +1,12 @@
-<p>
-  login works!
-</p>
+<h3>Login</h3>
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" type="email" class="form-control" [(ngModel)]="user.email">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input formControlName="password" type="password" class="form-control" [(ngModel)]="user.password">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid || loading">Login</button>
+</form>

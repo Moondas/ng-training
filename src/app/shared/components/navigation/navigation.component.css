@@ -1,0 +1,8 @@
+li:last-child a {
+    cursor: pointer;
+}
+
+.navbar-nav div {
+    color: #9d9d9d;
+    margin: 15px;
+}
