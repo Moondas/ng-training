@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatCheckboxModule, MatListModule, MatFormFieldModule } from '@angular/material';
-
+import
+{ MatInputModule, MatFormFieldModule, MatButtonModule, MatFormFieldControl } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { TaskModule } from './task/task.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,12 @@ import { TaskModule } from './task/task.module';
     AppRoutingModule,
     SharedModule,
     TaskModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatListModule,
-    MatFormFieldModule
+    FormsModule,
+    BrowserAnimationsModule,
+
+    MatInputModule,
+    MatFormFieldModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

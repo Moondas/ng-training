@@ -1,20 +1,24 @@
-<h3>
-  My Tasks
-  <img *ngIf="loading" src="assets/loader.gif">
-</h3>
-<mat-list role="list">
-  <mat-list-item *ngFor="let task of tasks">
-      <app-task-list-item
-        [task]="task"
-        [disabled]="loading"
-        (error)="loadTasks()"
-        (delete)="removeTask($event)"
-      ></app-task-list-item>
-  </mat-list-item>
-</mat-list>
-<button mat-raised-button type="button" (click)="addNewTask()" [disabled]="loading">
-  Add New Task
-</button>
-<button *ngIf="hasDeletable" mat-raised-button color="warn" type="button" (click)="deleteAll()" [disabled]="loading">
-  Delete all
-</button>
+<div class="container">
+  <h3>
+    My Tasks
+    <img *ngIf="loading" src="assets/loader.gif">
+  </h3>
+  <form>
+    <mat-list role="list">
+      <mat-list-item *ngFor="let task of tasks">
+          <app-task-list-item
+            [task]="task"
+            [disabled]="loading"
+            (error)="loadTasks()"
+            (delete)="removeTask($event)"
+          ></app-task-list-item>
+      </mat-list-item>
+    </mat-list>
+    <button mat-raised-button color="primary" type="button" (click)="addNewTask()" [disabled]="loading">
+      Add New Task
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="deleteAll()" [disabled]="!hasDeletable || loading">
+      Delete all
+    </button>
+  </form>
+</div>
