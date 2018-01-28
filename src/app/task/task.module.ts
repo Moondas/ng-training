@@ -8,6 +8,7 @@ import { TaskRoutingModule } from './task-routing.module';
 import { TaskService } from './services/task.service';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskListItemComponent } from './components/task-list-item/task-list-item.component';
+import { PropertyPipe } from './pipes/property.pipe';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { TaskListItemComponent } from './components/task-list-item/task-list-ite
   declarations: [
     TaskListComponent,
     TaskListItemComponent,
-    AgePipe
+    AgePipe,
+    PropertyPipe
   ]
 })
 export class TaskModule { }
