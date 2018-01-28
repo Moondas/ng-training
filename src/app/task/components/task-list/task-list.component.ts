@@ -1,9 +1,12 @@
+import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+
 
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subscribable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-task-list',
@@ -13,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 export class TaskListComponent implements OnInit {
   public tasks: Task[];
   public loading: boolean;
+  public hasDeletable: boolean;
 
   public constructor(private _taskService: TaskService) {
     //
@@ -28,6 +32,7 @@ export class TaskListComponent implements OnInit {
       tasks => {
         this.tasks = tasks;
         this.loading = false;
+        this.hasDeletable = this.tasks.length > 0;
       }
     );
   }
@@ -50,24 +55,28 @@ export class TaskListComponent implements OnInit {
   }
 
   public deleteAll() {
-    this.loading = true;
-    let observableBatch = [];
-
-    this.tasks.forEach(
-      element => {
-        observableBatch.push(
-          this._taskService.delete(element).subscribe(
-            _ => this.removeTask(element)
-          )            
-      );
+    if (!window.confirm('Are you sure, you want to delete all tasks?')) {
+       return;
       }
-    );
+    this.loading = true;
+    // Delete from behind
+    for (let i = this.tasks.length-1; i >= 0; i--) {
+      let task: Task = this.tasks[i];
 
-    forkJoin(observableBatch).subscribe(
-      null,
-      null,
-      () => this.loading = false
-    );
+      this._taskService.delete(task)
+        .subscribe(
+          _ => {
+            this.removeTask(task);
+             (this.tasks.length > 0) || this.loadTasks();
+             
+          },
+          e => {
+            console.log(e);
+            this.loadTasks();
+          }
+        )
+    }
+
   }
-
+  
 }

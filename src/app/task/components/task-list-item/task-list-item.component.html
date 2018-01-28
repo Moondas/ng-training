@@ -1,5 +1,5 @@
-<input type="checkbox" [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled">
-<input [(ngModel)]="task.name" (blur)="updateTask(task)" [disabled]="loading || disabled">
-<button class="btn btn-xs btn-danger" (click)="deleteTask(task)">Delete</button>
-<span class="small">{{task.created_at|age:now}} minutes</span>
+<mat-checkbox [(ngModel)]="task.is_done" (change)="updateTask(task)" [disabled]="loading || disabled"></mat-checkbox>
+<input matInput [(ngModel)]="task.name" (blur)="updateTask(task)" [disabled]="loading || disabled">
+<button mat-button color="warn" (click)="deleteTask(task)" [disabled]="loading || disabled">Delete</button>
+<span class="small">{{task.created_at|age:now}} mins ago</span>
 <img *ngIf="loading" src="assets/loader.gif">

@@ -24,9 +24,9 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
-    this.now = this._getGmtTime();
+    this.now = this._getUtcTime();
     this._timekeeper = window.setInterval(() => {
-      this.now = this._getGmtTime();
+      this.now = this._getUtcTime();
     }, 1000);
   }
 
@@ -34,7 +34,7 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
     window.clearInterval(this._timekeeper);
   }
 
-  private _getGmtTime() {
+  private _getUtcTime() {
     return Date.now() + (new Date()).getTimezoneOffset() * 60 * 1000;
   }
 

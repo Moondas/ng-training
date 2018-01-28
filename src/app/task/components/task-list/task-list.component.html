@@ -2,22 +2,19 @@
   My Tasks
   <img *ngIf="loading" src="assets/loader.gif">
 </h3>
-<pre>
-{{ tasks | json }}
-</pre>
-<ul>
-  <li *ngFor="let task of tasks">
+<mat-list role="list">
+  <mat-list-item *ngFor="let task of tasks">
       <app-task-list-item
         [task]="task"
         [disabled]="loading"
         (error)="loadTasks()"
         (delete)="removeTask($event)"
       ></app-task-list-item>
-  </li>
-</ul>
-<button type="button" class="btn btn-default" (click)="addNewTask()" [disabled]="loading">
+  </mat-list-item>
+</mat-list>
+<button mat-raised-button type="button" (click)="addNewTask()" [disabled]="loading">
   Add New Task
 </button>
-<button *ngIf="!!tasks" type="button" class="btn btn-danger" (click)="deleteAll()" [disabled]="loading">
+<button *ngIf="hasDeletable" mat-raised-button color="warn" type="button" (click)="deleteAll()" [disabled]="loading">
   Delete all
 </button>

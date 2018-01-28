@@ -5,7 +5,9 @@ import { RouterModule } from '@angular/router';
 
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { ApiService, AuthService, AuthGuard } from './';
+import { AuthService } from './services/auth.service';
+import { ApiService } from './services/api.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   imports: [

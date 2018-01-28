@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 
-import { Task } from '../';
-import { ApiService } from '../../shared/';
+import { Task } from './../models/task';
+import { ApiService } from './../../shared/services/api.service';
 
 @Injectable()
 export class TaskService extends ApiService {
@@ -20,7 +20,7 @@ export class TaskService extends ApiService {
     return this.request('PATCH', 'task/' + task.id, task);
   }
 
-  public delete(task: Task): Observable<void> {
+  public delete(task: Task): Observable<Task> {
     return this.request('DELETE', 'task/' + task.id, task);
   }
 
