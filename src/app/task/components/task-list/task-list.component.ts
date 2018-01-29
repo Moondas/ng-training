@@ -1,12 +1,12 @@
-import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/mapTo';
+import "rxjs/add/observable/interval";
+import { merge } from 'rxjs/observable/merge';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
-
 
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
-import { Observable, Subscribable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-task-list',
@@ -43,7 +43,10 @@ export class TaskListComponent implements OnInit {
     task.name = 'New Task';
     this._taskService.create(task).subscribe(
       () => this.loadTasks(),
-      () => this.loadTasks()
+      error => {
+        console.log(error);
+        this.loadTasks();
+      }
     );
   }
 
@@ -58,25 +61,27 @@ export class TaskListComponent implements OnInit {
     if (!window.confirm('Are you sure, you want to delete all tasks?')) {
        return;
       }
-    this.loading = true;
-    // Delete from behind
-    for (let i = this.tasks.length - 1; i >= 0; i--) {
-      let task: Task = this.tasks[i];
-
-      this._taskService.delete(task)
-        .subscribe(
-          () => {
-            this.removeTask(task);
-             if (!this.tasks.length) {
-               this.loadTasks();
-              }
-          },
-          error => {
-            console.log(error);
-            this.loadTasks();
-          }
-        )
-    }
-  }
-  
+      
+    let observableBatch: Array<any> = [];
+    
+    observableBatch = this.tasks.filter(
+      task => 
+        task.is_done ? this._taskService.delete(task).mapTo(task) : null
+    );
+    
+    if (observableBatch.length) {
+      this.loading = true;
+      merge(observableBatch).subscribe(
+        task => this.removeTask(task),
+        error => {
+          console.log("Error: ", error);
+          this.loadTasks();
+        },
+        () => {
+          this.loading = false;
+          this.hasDeletable = !!this.tasks.length;
+        }
+      );
+    }       
+  }  
 }
