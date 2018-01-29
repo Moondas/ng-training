@@ -60,23 +60,23 @@ export class TaskListComponent implements OnInit {
       }
     this.loading = true;
     // Delete from behind
-    for (let i = this.tasks.length-1; i >= 0; i--) {
+    for (let i = this.tasks.length - 1; i >= 0; i--) {
       let task: Task = this.tasks[i];
 
       this._taskService.delete(task)
         .subscribe(
-          _ => {
+          () => {
             this.removeTask(task);
-             (this.tasks.length > 0) || this.loadTasks();
-             
+             if (!this.tasks.length) {
+               this.loadTasks();
+              }
           },
-          e => {
-            console.log(e);
+          error => {
+            console.log(error);
             this.loadTasks();
           }
         )
     }
-
   }
   
 }

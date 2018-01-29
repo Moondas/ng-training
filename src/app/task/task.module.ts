@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule, MatListModule, MatFormFieldModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatListModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { AgePipe } from './pipes/age.pipe';
 import { TaskRoutingModule } from './task-routing.module';
@@ -15,6 +15,7 @@ import { PropertyPipe } from './pipes/property.pipe';
     CommonModule,
     FormsModule,
     TaskRoutingModule,
+    MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
     MatListModule,

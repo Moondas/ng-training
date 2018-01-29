@@ -1,40 +1,12 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/">NgTraining</a>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="nav navbar-nav">
-        <li [routerLinkActive]="['active']">
-          <a [routerLink]="['/home']">Home</a>
-        </li>
-        <li [routerLinkActive]="['active']">
-          <a [routerLink]="['/task/list']">Tasks</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!authService.user" [routerLinkActive]="['active']">
-          <a [routerLink]="['/user/registration']">Registration</a>
-        </li>
-        <li *ngIf="!authService.user" [routerLinkActive]="['active']">
-          <a [routerLink]="['/user/login']">Log In</a>
-        </li>
-        <li *ngIf="!!authService.user">
-          <div>
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            {{authService.user.name}}
-          </div>
-        </li>
-        <li *ngIf="!!authService.user">
-          <a (click)="authService.logout()">Log Out</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-button [routerLink]="['/home']">{{ 'NgTraining' | uppercase }}</button>
+    <button mat-button [routerLink]="['/home']">Home</button>
+    <button mat-button [routerLink]="['/task/list']">Tasks</button>
+    <span class="spacer"></span>
+    <button mat-button *ngIf="!authService.user" [routerLink]="['/user/registration']">{{ 'Registration' }}</button>
+    <button mat-button *ngIf="!authService.user" [routerLink]="['/user/login']">{{ 'Login' }}</button>
+    <span *ngIf="authService.user" class="mat-button">{{ authService.user.name }}</span>
+    <button mat-button *ngIf="authService.user" (click)="authService.logout()">{{ 'Logout' }}</button>
+  </mat-toolbar-row>
+</mat-toolbar>

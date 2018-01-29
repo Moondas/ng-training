@@ -1,11 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+/* Reset body margin */
+
+body {
+  margin: 0;
+}
+
 .container {
   display: flex;
   flex-direction: column;
+  margin: 0 15px;
 }
 
 form > .mat-form-field {
   width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }

@@ -8,12 +8,16 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { AuthService } from './services/auth.service';
 import { ApiService } from './services/api.service';
 import { AuthGuard } from './guards/auth.guard';
+import { MatToolbarModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     ApiService,
