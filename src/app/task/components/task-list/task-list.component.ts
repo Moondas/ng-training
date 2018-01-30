@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/mapTo';
-import "rxjs/add/observable/interval";
 import { merge } from 'rxjs/observable/merge';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 
@@ -26,13 +25,21 @@ export class TaskListComponent implements OnInit {
     this.loadTasks();
   }
 
+  public updateEvent() {
+    this.hasDeletable = this.tasks.filter(
+      task => {
+        return task.is_done;
+      }
+    ).length > 0;
+  }
+
   public loadTasks() {
     this.loading = true;
     this._taskService.list().subscribe(
       tasks => {
         this.tasks = tasks;
         this.loading = false;
-        this.hasDeletable = this.tasks.length > 0;
+        this.updateEvent();
       }
     );
   }
@@ -57,7 +64,7 @@ export class TaskListComponent implements OnInit {
     }
   }
 
-  public deleteAll() {
+  public deleteCompleted() {
     if (!window.confirm('Are you sure, you want to delete all tasks?')) {
        return;
       }
@@ -79,7 +86,7 @@ export class TaskListComponent implements OnInit {
         },
         () => {
           this.loading = false;
-          this.hasDeletable = !!this.tasks.length;
+          this.updateEvent();
         }
       );
     }       

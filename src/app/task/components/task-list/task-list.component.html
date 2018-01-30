@@ -11,13 +11,14 @@
             [disabled]="loading"
             (error)="loadTasks()"
             (delete)="removeTask($event)"
+            (update)="updateEvent()"
           ></app-task-list-item>
       </mat-list-item>
     </mat-list>
     <button mat-raised-button color="primary" type="button" (click)="addNewTask()" [disabled]="loading">
       Add New Task
     </button>
-    <button mat-raised-button color="warn" type="button" (click)="deleteAll()" [disabled]="!hasDeletable || loading">
+    <button mat-raised-button color="warn" type="button" (click)="deleteCompleted()" [disabled]="!hasDeletable || loading">
       Delete completed tasks
     </button>
   </form>

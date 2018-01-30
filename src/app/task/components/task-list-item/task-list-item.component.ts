@@ -16,6 +16,7 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
   @Input() public disabled: boolean;
   @Output() public error = new EventEmitter();
   @Output() public delete = new EventEmitter<Task>();
+  @Output() public update = new EventEmitter();
 
   private  _timekeeper: number;
 
@@ -43,6 +44,7 @@ export class TaskListItemComponent implements OnInit, OnDestroy {
     this._taskService.update(task).subscribe(
       updatedTask => {
         task = updatedTask;
+        this.update.emit();
         this.loading = false;
       },
       error => {
