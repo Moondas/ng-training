@@ -11,7 +11,7 @@
             [disabled]="loading"
             (error)="loadTasks()"
             (delete)="removeTask($event)"
-            (update)="updateEvent()"
+            (update)="setHasDeletable()"
           ></app-task-list-item>
       </mat-list-item>
     </mat-list>

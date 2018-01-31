@@ -25,12 +25,8 @@ export class TaskListComponent implements OnInit {
     this.loadTasks();
   }
 
-  public updateEvent() {
-    this.hasDeletable = this.tasks.filter(
-      task => {
-        return task.is_done;
-      }
-    ).length > 0;
+  public setHasDeletable() {
+    this.hasDeletable = this.tasks.filter(task => task.is_done).length > 0;
   }
 
   public loadTasks() {
@@ -39,7 +35,7 @@ export class TaskListComponent implements OnInit {
       tasks => {
         this.tasks = tasks;
         this.loading = false;
-        this.updateEvent();
+        this.setHasDeletable();
       }
     );
   }
@@ -86,7 +82,7 @@ export class TaskListComponent implements OnInit {
         },
         () => {
           this.loading = false;
-          this.updateEvent();
+          this.setHasDeletable();
         }
       );
     }       
