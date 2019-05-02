@@ -1,8 +1,6 @@
+import { mapTo } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/mapTo';
-import { merge } from 'rxjs/observable/merge';
-import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { Observable,  merge } from 'rxjs';
 
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../models/task';
@@ -69,7 +67,7 @@ export class TaskListComponent implements OnInit {
     
     observableBatch = this.tasks.filter(
       task => 
-        task.is_done ? this._taskService.delete(task).mapTo(task) : null
+        task.is_done ? this._taskService.delete(task).pipe(mapTo(task)) : null
     );
     
     if (observableBatch.length) {
